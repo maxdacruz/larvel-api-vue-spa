@@ -43,8 +43,8 @@ class AnnonceController extends Controller
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
-            'user' => $request->user()->id,
-            'category' => $request->get('category')
+            'user_id' => 11, //Auth::user()->id,
+            'category_id' => $request->get('category')
 
         ]);
 
