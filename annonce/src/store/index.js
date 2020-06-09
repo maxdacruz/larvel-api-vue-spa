@@ -18,11 +18,11 @@ export default new Vuex.Store({
     async login({ dispatch }, credentials) {
       await axios.get("sanctum/csrf-cookie");
       await axios.post("/login", credentials);
-      return dispatch('getUser');
+      return dispatch("getUser");
     },
     async logout({ dispatch }) {
       await axios.post("/logout");
-      return dispatch('getUser');
+      return dispatch("getUser");
     },
 
     getUser({ commit }) {
@@ -32,11 +32,9 @@ export default new Vuex.Store({
           commit("SET_USER", res.data);
         })
         .catch(() => {
-
           commit("SET_USER", null);
         });
     }
   },
   modules: {}
-})
-
+});
