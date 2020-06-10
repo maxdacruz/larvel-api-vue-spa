@@ -1,16 +1,36 @@
 <template>
-  <div class="login">
-    <h1>Login</h1>
-    <form @submit.prevent="register">
-      <input v-model="form.name" type="text" placeholder="name" />
-      <br />
-      <input v-model="form.email" type="email" placeholder="email" />
-      <br />
-      <input v-model="form.password" type="password" placeholder="password" />
-      <br />
-      <button>Register</button>
-    </form>
-  </div>
+  <v-app id="register">
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>Login</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field label="E-mail" name="email" prepend-icon="mdi-account" type="text"></v-text-field>
+                  <v-text-field
+                    id="password"
+                    label="Password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                  ></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn @click="register" color="primary">Register</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -21,8 +41,8 @@ axios.defaults.baseURL = "http://localhost:8000";
 export default {
   data: () => ({
     form: {
-      name: "yolo",
-      email: "yolo@gmail.com",
+      name: "test",
+      email: "test@gmail.com",
       password: "azeazeaze",
       password_confirmation: "azeazeaze"
     }

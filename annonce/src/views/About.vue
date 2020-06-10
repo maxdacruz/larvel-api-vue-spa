@@ -1,7 +1,9 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <button @click="test">Test</button>
+    <v-app>
+      <h1>This is an about page</h1>
+      <button @click="test">Test</button>
+    </v-app>
   </div>
 </template>
 
