@@ -10,14 +10,44 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
-                  <v-text-field label="E-mail" name="email" prepend-icon="mdi-account" type="text"></v-text-field>
+                <v-form ref="form" v-model="valid">
                   <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    label="Name"
+                    name="Name"
+                    prepend-icon="mdi-account"
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    name="email"
+                    prepend-icon="mdi-account"
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    :rules="passwordRules"
                     id="password"
                     label="Password"
                     name="password"
                     prepend-icon="mdi-lock"
-                    type="password"
+                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show ? 'text' : 'password'"
+                    @click:append="show = !show"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password_confirm"
+                    :rules="[passwordMatch, password_confirmRules]"
+                    id="password_confirm"
+                    label="Confirm Password"
+                    name="password_confirm"
+                    prepend-icon="mdi-lock"
+                    :type="show ? 'text' : 'password'"
+                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="show = !show"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -40,20 +70,50 @@ axios.defaults.baseURL = "http://localhost:8000";
 
 export default {
   data: () => ({
-    form: {
-      name: "test",
-      email: "test@gmail.com",
-      password: "azeazeaze",
-      password_confirmation: "azeazeaze"
-    }
+    show: false,
+    errorMessage: "",
+    valid: false,
+    email: "",
+    name: "",
+    nameRules: [v => !!v || "Name is required"],
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+/.test(v) || "E-mail must be valid"
+    ],
+    password: "",
+    passwordRules: [
+      v => !!v || "Paswword is required",
+      v => (v && v.length >= 8) || "Password must have 7+ characters",
+      v => /(?=.*[A-Z])/.test(v) || "Must have one uppercase character",
+      v => /(?=.*\d)/.test(v) || "Must have one number"
+    ],
+    password_confirm: "",
+    password_confirmRules: v => !!v || "Field is required"
   }),
+  computed: {
+    passwordMatch() {
+      return () =>
+        this.password === this.password_confirm || "Password must match";
+    }
+  },
   methods: {
-    register() {
-      axios.get("sanctum/csrf-cookie").then(() => {
-        axios.post("/register", this.form).then(res => {
-          console.log(res);
-        });
-      });
+    async register() {
+      if (this.$refs.form.validate()) {
+        this.$store
+          .dispatch("register", {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            password_confirm: this.password_confirm
+          })
+          .then(() => {
+            this.$router.replace("/");
+          })
+          .catch(error => {
+            console.log(error.response.data.message);
+            this.errorMessage = error.response.data.message;
+          });
+      }
     }
   }
 };

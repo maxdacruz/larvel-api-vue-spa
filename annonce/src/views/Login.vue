@@ -8,7 +8,7 @@
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="valid">
+            <v-form v-model="valid" ref="form">
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -25,12 +25,15 @@
                 label="Password"
                 name="password"
                 prepend-icon="mdi-lock"
-                type="password"
+                :type="show ? 'text' : 'password'"
                 required
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="show = !show"
               ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <p class="red--text">{{errorMessage}}</p>
             <v-spacer></v-spacer>
             <v-btn @click="login" color="primary">Login</v-btn>
           </v-card-actions>
@@ -43,6 +46,8 @@
 <script>
 export default {
   data: () => ({
+    show: false,
+    errorMessage: "",
     valid: false,
     email: "",
     emailRules: [
@@ -55,8 +60,20 @@ export default {
 
   methods: {
     async login() {
-      this.$store.dispatch("login", this.email + this.password);
-      //return this.$router.replace("/");
+      if (this.$refs.form.validate()) {
+        this.$store
+          .dispatch("login", {
+            email: this.email,
+            password: this.password
+          })
+          .then(() => {
+            this.$router.replace("/");
+          })
+          .catch(error => {
+            console.log(error.response.data.message);
+            this.errorMessage = error.response.data.message;
+          });
+      }
     }
   }
 };

@@ -5,7 +5,12 @@
         <h1>Home Page</h1>
         <v-container fluid>
           <v-row dense>
-            <v-card class="mx-auto" max-width="400" v-for="item in annonnces.data" :key="item.id">
+            <v-card
+              class="mx-auto mt-4"
+              max-width="400"
+              v-for="item in annonnces.data"
+              :key="item.id"
+            >
               <v-img
                 class="white--text align-end"
                 height="200px"
@@ -27,7 +32,6 @@
 
 <script>
 import axios from "axios";
-axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8000";
 
 export default {
@@ -39,10 +43,8 @@ export default {
   },
   methods: {
     test() {
-      axios.get("sanctum/csrf-cookie").then(() => {
-        axios.get("/api/annonce").then(res => {
-          this.annonnces = res.data;
-        });
+      axios.get("/api/annonce").then(res => {
+        this.annonnces = res.data;
       });
     }
   }

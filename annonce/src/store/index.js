@@ -17,9 +17,16 @@ export default new Vuex.Store({
   actions: {
     async login({ dispatch }, credentials) {
       await axios.get("sanctum/csrf-cookie");
-      await axios.post("/login", credentials);
+      await axios.post("/login", credentials)
       return dispatch("getUser");
     },
+    async register({ dispatch }, credentials) {
+      await axios.get("sanctum/csrf-cookie");
+      await axios.post("/register", credentials)
+      return dispatch("getUser");
+    },
+
+
     async logout({ dispatch }) {
       await axios.post("/logout");
       return dispatch("getUser");
