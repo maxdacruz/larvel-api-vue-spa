@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::whereNull('category_id')
-            ->with('childrenCategories')
+            //->with('childrenCategories')
             ->get();
 
         return CategoryResource::collection($categories);

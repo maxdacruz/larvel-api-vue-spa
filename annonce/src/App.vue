@@ -2,19 +2,25 @@
   <div id="app">
     <v-app>
       <Header />
-      <router-view />
+      <v-content>
+        <Search />
+        <router-view />
+      </v-content>
     </v-app>
   </div>
 </template> 
 
+
+
 <script>
 import Header from "./components/Header.vue";
+import Search from "./components/Search.vue";
 
 export default {
   name: "App",
-
   components: {
-    Header
+    Header,
+    Search
   },
 
   data: () => ({

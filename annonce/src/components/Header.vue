@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar dense dark app>
+  <v-app-bar dense dark app flat>
     <v-navigation-drawer v-model="sidebar" absolute temporary app>
       <v-list nav dense>
         <v-list-item v-for="item in menuItems" :key="item.title" :to="item.path">
@@ -24,9 +24,7 @@
 
     <v-app-bar-nav-icon @click.stop="sidebar = !sidebar" class="hidden-sm-and-up"></v-app-bar-nav-icon>
 
-    <div>
-      <v-toolbar-title>Page title</v-toolbar-title>
-    </div>
+    <v-toolbar-title>Page title</v-toolbar-title>
 
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-xs-only">
@@ -45,6 +43,7 @@
 
 <script>
 export default {
+  components: {},
   methods: {
     logout() {
       this.$store.dispatch("logout");

@@ -63,9 +63,8 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonces = Annonce::findorfail($id);
 
-        return AnnonceResource::collection($annonces);
+        return new AnnonceResource(Annonce::find($id));
     }
 
     /**

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Annonce from "../views/Annonce.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  }, {
+    path: '/annonce/:id',
+    name: 'Annonce',
+    component: Annonce
   }
 ];
 

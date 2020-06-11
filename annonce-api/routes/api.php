@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/annonce', 'AnnonceController@index');
-Route::get('/annonce/:id', 'AnnonceController@show');
+Route::get('/annonce/{id}', 'AnnonceController@show');
 Route::post('/annonce', 'AnnonceController@store');
 Route::get('/categories', 'CategoryController@index');
