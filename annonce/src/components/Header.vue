@@ -56,7 +56,8 @@ export default {
       sidebar: false,
       menuItems: [
         { title: "Home", path: "/", icon: "mdi-home" },
-        { title: "About", path: "/about", icon: "" }
+        { title: "About", path: "/about", icon: "" },
+        { title: "Add Annonce", path: "/NewAnnonce", icon: "" }
       ],
       notLoged: [
         { title: "Login", path: "/login", icon: "mdi-face" },

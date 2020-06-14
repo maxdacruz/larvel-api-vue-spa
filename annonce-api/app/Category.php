@@ -10,7 +10,7 @@ class Category extends Model
 
     public function annonces()
     {
-        return $this->belongsToMany('App\Annonce');
+        return $this->hasMany('App\Annonce');
     }
     public function categories()
     {
@@ -20,5 +20,9 @@ class Category extends Model
     public function childrenCategories()
     {
         return $this->hasMany(Category::class);
+    }
+    public function subAnnonces()
+    {
+        return $this->hasManyThrough(Annonce::class, self::class, 'category_id', 'category_id');
     }
 }

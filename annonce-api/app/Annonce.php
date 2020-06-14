@@ -16,6 +16,10 @@ class Annonce extends Model
     }
     public function category()
     {
-        return $this->belongsToMany('App\Category');
+        return $this->belongsTo('App\Category');
+    }
+    public function image()
+    {
+        return $this->hasmany('App\AnnonceImage');
     }
 }

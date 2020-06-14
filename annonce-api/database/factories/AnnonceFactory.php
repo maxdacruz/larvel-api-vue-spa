@@ -4,6 +4,7 @@
 
 use App\Annonce;
 use App\User;
+use App\Category;
 
 use Faker\Generator as Faker;
 
@@ -21,6 +22,7 @@ $factory->define(Annonce::class, function (Faker $faker) {
         'description' => $faker->sentence,
         'price' => $faker->randomFloat(2,  1, 1000),
         'user_id' => getInstanceOf(User::class),
+        'category_id' => getInstanceOf(Category::class)
 
     ];
 });
