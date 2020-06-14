@@ -4,6 +4,10 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
+import { Upload, Dialog } from 'element-ui';
+
+Vue.component(Upload.name, Upload);
+Vue.component(Dialog.name, Dialog);
 
 Vue.config.productionTip = false;
 

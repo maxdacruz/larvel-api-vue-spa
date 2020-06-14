@@ -17,17 +17,20 @@
                 name="description"
                 type="text"
               ></v-text-field>
-              <el-upload
-                @change="updateImageList"
-                list-type="picture-card"
-                :on-preview="handlePictureCardPreview"
-                :on-remove="handleRemove"
-              >
-                <i class="el-icon-plus"></i>
-              </el-upload>
-              <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="dialogImageUrl" alt />
-              </el-dialog>
+              <div>
+                <el-upload
+                  action="#"
+                  :on-change="updateImageList"
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :auto-upload="false"
+                >
+                  <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                  <img width="100%" :src="dialogImageUrl" alt />
+                </el-dialog>
+              </div>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -39,6 +42,12 @@
     </v-row>
   </v-content>
 </template>
+<style >
+.v-application ul,
+.v-application ol {
+  padding-left: 0;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -56,11 +65,10 @@ export default {
 
   methods: {
     updateImageList(file) {
-      this.imageList.push(file);
+      this.imageList.push(file.raw);
+      console.log(this.imageList);
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
+
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
@@ -73,8 +81,7 @@ export default {
       formData.append("description", this.description);
       formData.append("images", this.imageList);
 
-      this.imageList[0].forEach(function(image, key) {
-        console.log(key, image);
+      this.imageList.forEach(function(image, key) {
         formData.append(`images[` + key + `]`, image);
       });
 
