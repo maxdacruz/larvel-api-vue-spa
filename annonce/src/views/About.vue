@@ -1,14 +1,12 @@
 <template>
   <div class="about">
-    <v-app>
-      <h1>This is an about page</h1>
-      <button @click="test">Test</button>
+    <h1>This is an about page</h1>
+    <button @click="test">Test</button>
 
-      <img
-        src="http://localhost:8000\uploads\annonce\172\BLXd2Vh4TB2eIvTeIuTfSceHQRIQMo4dtrCxwAIh.png"
-        alt
-      />
-    </v-app>
+    <img
+      src="http://localhost:8000\uploads\annonce\172\BLXd2Vh4TB2eIvTeIuTfSceHQRIQMo4dtrCxwAIh.png"
+      alt
+    />
   </div>
 </template>
 

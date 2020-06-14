@@ -3,8 +3,9 @@
     <v-app>
       <Header />
       <v-content>
-        <Search />
-        <router-view />
+        <v-main>
+          <router-view />
+        </v-main>
       </v-content>
     </v-app>
   </div>
@@ -14,13 +15,12 @@
 
 <script>
 import Header from "./components/Header.vue";
-import Search from "./components/Search.vue";
+//import Search from "./components/Search.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
-    Search
+    Header
   },
 
   data: () => ({

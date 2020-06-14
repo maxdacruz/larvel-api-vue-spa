@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar dense dark app flat>
+  <v-app-bar dense dark app fixed flat>
     <v-navigation-drawer v-model="sidebar" absolute temporary app>
       <v-list nav dense>
         <v-list-item v-for="item in menuItems" :key="item.title" :to="item.path">
