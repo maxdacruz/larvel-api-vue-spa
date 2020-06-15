@@ -22,4 +22,14 @@ class Annonce extends Model
     {
         return $this->hasmany('App\AnnonceImage');
     }
+
+    public function scopeWithFilters($query)
+    {
+        return $query->when(count(request()->input('etat', [])), function ($query) {
+            $query->whereIn('etat', request()->input('etat'));
+        })
+            ->when(count(request()->input('livraison', [])), function ($query) {
+                $query->whereIn('livraison', request()->input('livraison'));
+            });
+    }
 }

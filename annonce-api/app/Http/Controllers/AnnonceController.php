@@ -17,23 +17,22 @@ class AnnonceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($categ = null)
+    public function index()
     {
-        if ($categ == null) {
 
-            $annonces = Annonce::latest()->paginate(20);
+        //$annonces = Annonce::latest()->paginate(20);
+        $annonces = Annonce::withFilters()->get();
 
-            return AnnonceResource::collection($annonces);
-        } else {
+        return AnnonceResource::collection($annonces);
 
-            //retourne tous les annonces des categorye principale et de ces enfants c'est ouf
-            //https://laracasts.com/discuss/channels/laravel/get-all-products-from-parent-category-and-its-all-sub-categories
 
-            $category = Category::with(['annonces', 'subAnnonces'])->find(3);
+        //retourne tous les annonces des categorye principale et de ces enfants c'est ouf
+        //https://laracasts.com/discuss/channels/laravel/get-all-products-from-parent-category-and-its-all-sub-categories
+
+        /* $category = Category::with(['annonces', 'subAnnonces'])->find(3);
             $allProducts = $category->annonces->merge($category->subAnnonces);
 
-            return $allProducts;
-        }
+            return $allProducts; */
     }
 
     /**

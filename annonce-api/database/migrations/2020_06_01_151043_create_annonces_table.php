@@ -17,7 +17,9 @@ class CreateAnnoncesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->nullable();
+            $table->char('livraison', 25);
+            $table->char('etat', 20);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('category_id')->nullable();

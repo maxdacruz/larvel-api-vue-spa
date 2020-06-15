@@ -3,9 +3,7 @@
     <v-app>
       <Header />
       <v-content>
-        <v-main>
-          <router-view />
-        </v-main>
+        <router-view />
       </v-content>
     </v-app>
   </div>

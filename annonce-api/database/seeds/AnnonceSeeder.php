@@ -11,6 +11,6 @@ class AnnonceSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Annonce', 1)->create();
+        factory('App\Annonce', 50)->create();
     }
 }

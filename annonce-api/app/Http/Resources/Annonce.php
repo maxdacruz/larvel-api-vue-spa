@@ -21,6 +21,8 @@ class Annonce extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
+            'etat' => $this->etat,
+            'livraison' => $this->livraison
         ];
     }
 }
